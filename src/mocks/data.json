@@ -1,0 +1,25 @@
+{
+  "msgList": [
+    {
+      "nickName": "GeorgeZou",
+      "avatar": "https://mtbird-cdn.staringos.com/0010141761616-1311114-413141-113126-157101512171315151100.jpeg",
+      "from": "me",
+      "content": "这是一条新消息..."
+    }, {
+      "nickName": "星搭小星",
+      "avatar": "",
+      "from": "them",
+      "content": "这是一条新消息..这是一条新消息这是一条新消息这是一条新消息.是一条新消息这是一条新消息这是一条新消息.是一条新消息这是一条新消息这是一条新消息.是一条新消息这是一条新消息这是一条新消息.是一条新消息这是一条新消息这是一条新消息."
+    }, {
+      "nickName": "GeorgeZou",
+      "avatar": "https://mtbird-cdn.staringos.com/0010141761616-1311114-413141-113126-157101512171315151100.jpeg",
+      "from": "me",
+      "content": "这是一条新消息..."
+    }, {
+      "nickName": "星搭小星",
+      "avatar": "",
+      "from": "them",
+      "content": "这是一条新消息..."
+    }
+  ]
+}

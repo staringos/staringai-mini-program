@@ -1,0 +1,30 @@
+.messageWrapper {
+  display: flex;
+  margin-bottom: 30px;
+
+  .messageContentWrapper {
+    flex: 1;
+    display: flex;
+  }
+
+  .messageContent {
+    background-color: #96d9fd;
+    border-radius: 10px;
+    padding: 10px 20px;
+    width: auto;
+  }
+
+  .messageAvatar {
+    margin: 0 20px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  &.me {
+    flex-direction: row-reverse;
+    .messageContentWrapper {
+      justify-content: flex-end;
+    }
+    // justify-content: flex-end;
+  }
+}
