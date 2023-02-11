@@ -1,14 +1,30 @@
 .messageInputWrapper {
   display: flex;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: rgb(224, 255, 255);
 
   .messageInput {
     flex: 1;
     padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    background-color: rgb(249, 255, 255);
+  }
+
+  .messageInputContainer {
+    flex: 1;
+    width: 100%;
+    min-height: 45px;
+    max-height: 45px;
+    display: flex;
+    align-items: center;
   }
 
   .messageSendButton {
     width: 100px;
-    margin-left: 10px;
+    // margin-left: 10px;
     border-radius: 0;
   }
 

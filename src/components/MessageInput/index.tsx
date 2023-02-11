@@ -48,6 +48,9 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
   return (
     <View className={styles.messageInputWrapper}>
       <AtToast isOpened={isOpened} text='消息不能为空' icon='warning' duration={3000}></AtToast>
+      {/* <View className={styles.messageInputContainer}>
+        
+      </View> */}
       <Input
         className={styles.messageInput}
         name=''
