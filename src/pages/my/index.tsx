@@ -17,26 +17,6 @@ export default class Index extends Component<PropsWithChildren> {
 
   componentDidHide () { }
 
-  onShareAppMessage = (res) => {
-    if (res.from === 'button') {
-      // 来自页面内转发按钮
-      console.log(res.target)
-    }
-    return {
-      title: '与 ChatGPT 立即开聊 - 星搭小星',
-      path: `/pages/index/index?f=sam`
-    }
-  }
-
-  onShareTimeline = () => {
-    let shareData = {
-      title: '与 ChatGPT 立即开聊 - 星搭小星',
-      path: `/pages/index/index?f=st`,  // 分享的路径
-      // imageUrl： '',  // 分享的图片链接
-    }
-    return shareData;
-  }
-
   render () {
     return (
       <View className='container'>

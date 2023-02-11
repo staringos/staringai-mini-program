@@ -1,5 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: '聊天列表',
+  navigationBarTitleText: '星搭小星',
   disableScroll: true,
   enableShareAppMessage: true
 })

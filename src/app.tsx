@@ -1,5 +1,6 @@
 import { Component, PropsWithChildren } from 'react'
 import './app.less'
+import Store from './store'
 
 class App extends Component<PropsWithChildren> {
 
@@ -11,7 +12,7 @@ class App extends Component<PropsWithChildren> {
 
   // this.props.children 是将要会渲染的页面
   render () {
-    return this.props.children
+    return <Store.Provider>{this.props.children}</Store.Provider>
   }
 }
 

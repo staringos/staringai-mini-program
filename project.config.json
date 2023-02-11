@@ -4,6 +4,8 @@
   "description": "staringos chatgpt",
   "appid": "wxf7f97b0133925c7d",
   "setting": {
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false,
     "urlCheck": true,
     "es6": false,
     "enhance": false,
