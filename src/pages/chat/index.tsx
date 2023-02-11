@@ -25,11 +25,10 @@ export default class Index extends Component<PropsWithChildren, IState> {
   
   componentDidMount () {
     const params = Taro.Current.router?.params
-    console.log('params:', params) // 页面参数获取
 
     this.setState({
       conversationId: params?.id,
-      isShare: !!params?.isShare
+      isShare: params?.share as any
     })
   }
 
@@ -46,14 +45,15 @@ export default class Index extends Component<PropsWithChildren, IState> {
     }
     return {
       title: '与 ChatGPT 的聊天记录 - 星搭小星',
-      path: `/pages/chat/index?id=${this.state.conversationId}&isShare=true`
+      path: `/pages/chat/index?id=${this.state.conversationId}&share=1`
     }
   }
 
   onShareTimeline = () => {
     let shareData = {
       title: '与 ChatGPT 的聊天记录 - 星搭小星',
-      path: `/pages/chat/index?id=${this.state.conversationId}&isShare=true`,  // 分享的路径
+      path: `/pages/chat/index?share=1&id=${this.state.conversationId}`,  // 分享的路径
+      query: `share=1&id=${this.state.conversationId}`,
       imageUrl: 'https://mtbird-cdn.staringos.com/product/images/share.jpg'  // 分享的图片链接
     }
     return shareData;
@@ -61,8 +61,6 @@ export default class Index extends Component<PropsWithChildren, IState> {
 
   render () {
     const { conversationId, isShare } = this.state
-
-    console.log("conversationId:", conversationId)
 
     return (
       <View className='container'>

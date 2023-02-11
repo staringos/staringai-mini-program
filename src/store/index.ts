@@ -30,14 +30,16 @@ export default createContainer(() => {
       conversationList
     },
     actions: {
-      async getConversation(id: string) {
+      async getConversation(id: string, isShare: boolean) {
         Taro.showLoading({ title: "加载中..."})
         const conv = await getConversation(id)
-        if (conv.data?.data && conv.data?.data?.id === id) {
+        if (!isShare && conv.data?.data && conv.data?.data?.id === id) {
           conversationList[id] = conv.data.data
           setConversationList({...conversationList})
         }
         Taro.hideLoading()
+
+        return conv.data?.data
       },
       async newConversation() {
         const id = randomNum(10)

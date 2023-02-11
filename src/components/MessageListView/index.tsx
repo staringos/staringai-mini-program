@@ -17,7 +17,8 @@ const MessageListView = ({conversationId, isShare}: IProps) => {
 
   const init = async () => {
     if (!conversationId) return
-    await actions.getConversation(conversationId)
+    const data = await actions.getConversation(conversationId, isShare)
+    setCurConv(data)
   }
 
   useEffect(() => {
