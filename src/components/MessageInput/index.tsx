@@ -1,6 +1,7 @@
 import { AtButton, AtToast } from 'taro-ui'
 import { useState } from 'react'
 import { Input, View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 import 'taro-ui/dist/style/components/button.scss'
 import 'taro-ui/dist/style/components/loading.scss'
 import 'taro-ui/dist/style/components/input.scss'
@@ -37,10 +38,16 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
     setMsg('')
   }
 
+  const handleGotoHome = () => {
+    Taro.navigateTo({
+      url: `/pages/index/index?f=share`
+    })
+  }
+
   if (isShare) {
     return (
       <View className={styles.messageInputWrapper}>
-        <AtButton className={styles.gotoHomeButton} type='primary'>与 ChatGPT 立即开聊</AtButton>
+        <AtButton className={styles.gotoHomeButton} onClick={handleGotoHome} type='primary'>与 ChatGPT 立即开聊</AtButton>
       </View>
     )
   }
