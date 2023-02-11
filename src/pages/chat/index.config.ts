@@ -1,5 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: '星搭小星',
+  navigationBarTitleText: 'ChatGPT',
   disableScroll: true,
   enableShareAppMessage: true
 })

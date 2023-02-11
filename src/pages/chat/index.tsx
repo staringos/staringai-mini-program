@@ -54,7 +54,7 @@ export default class Index extends Component<PropsWithChildren, IState> {
     let shareData = {
       title: '与 ChatGPT 的聊天记录 - 星搭小星',
       path: `/pages/chat/index?id=${this.state.conversationId}&isShare=true`,  // 分享的路径
-      // imageUrl： '',  // 分享的图片链接
+      imageUrl: 'https://mtbird-cdn.staringos.com/product/images/share.jpg'  // 分享的图片链接
     }
     return shareData;
   }
@@ -66,8 +66,8 @@ export default class Index extends Component<PropsWithChildren, IState> {
 
     return (
       <View className='container'>
-        <MessageListView conversationId={conversationId} />
-        <MessageInput conversationId={conversationId as string} isShare={isShare} />
+        <MessageListView conversationId={conversationId} isShare={!!isShare} />
+        <MessageInput conversationId={conversationId as string} isShare={!!isShare} />
       </View>
     )
   }

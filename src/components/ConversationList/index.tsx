@@ -38,7 +38,7 @@ const ConversationList = () => {
 
   return (
     <View>
-      <AtButton className={styles.mainButton} onClick={handleNewClick} type='primary'>创建新会话</AtButton>
+      <AtButton className={styles.mainButton} onClick={handleNewClick} type='primary'>与 ChatGPT 立即开聊</AtButton>
       <AtList>
         {values(convList).map(cur => {
           return <AtListItem title={cur.messages[0]?.content} onClick={() => handleClick(cur.id)} key={cur.id} />

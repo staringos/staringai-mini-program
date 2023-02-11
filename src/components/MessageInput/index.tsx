@@ -60,6 +60,7 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
       </View> */}
       <Input
         className={styles.messageInput}
+        placeholderClass={styles.messageInputPlaceholder}
         name=''
         type='text'
         placeholder='请输入消息'

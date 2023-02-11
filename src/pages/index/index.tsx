@@ -7,6 +7,7 @@ import "taro-ui/dist/style/components/button.scss" // 按需引入
 import './index.less'
 import ConversationList from '../../components/ConversationList';
 import TabBar from '../../components/TabBar';
+import HomeSwiper from '../../components/HomeSwiper';
 
 export default class Index extends Component<PropsWithChildren> {
   componentDidMount () { }
@@ -40,6 +41,7 @@ export default class Index extends Component<PropsWithChildren> {
   render () {
     return (
       <View className='container'>
+        <HomeSwiper />
         <ConversationList />
         <TabBar current={0} />
       </View>

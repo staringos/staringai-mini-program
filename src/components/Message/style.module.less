@@ -20,6 +20,7 @@
     margin: 0 20px;
     min-width: 44px;
     min-height: 44px;
+    flex-shrink: 0;
   }
 
   &.me {
@@ -29,5 +30,22 @@
       line-height: 44px;
     }
     // justify-content: flex-end;
+  }
+
+  .messageRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    word-break: break-word;
+  }
+
+  .messageNickname {
+    font-size: 26px;
+    color: #0ea8fa;
+    margin-bottom: 5px;
+
+    &.right {
+      text-align: right;
+    }
   }
 }
