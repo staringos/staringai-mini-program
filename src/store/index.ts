@@ -69,7 +69,9 @@ export default createContainer(() => {
         curConv.messages.push(msg)
         setConversationList({...conversationList})
 
+        Taro.showLoading({ title: "加载中..."})
         const res = (await sendMessage(msg)).data as any
+        Taro.hideLoading()
         
         // {"role":"assistant","id":"cmpl-6iJDQ9cEsp52WIzEKa4qTjsCeuRU0","parentMessageId":"4a86e84b-abdc-4262-8050-e0d065b35b9d","conversationId":"undefined","text":"246"}
         const msgThem = {
