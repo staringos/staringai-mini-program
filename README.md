@@ -15,4 +15,4 @@ yarn run start
 
 ### 立即体验
 
-![立即体验](./images/qrcode.jpg)
+<img src="./images/qrcode.jpg" width="160px" />
