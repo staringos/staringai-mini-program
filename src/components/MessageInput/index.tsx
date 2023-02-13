@@ -67,6 +67,7 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
         onInput={handleInputChange}
         onConfirm={handleSend}
         maxlength={3000}
+        cursorSpacing={140}
         showConfirmBar={false}
       >
       </Textarea>
