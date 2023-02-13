@@ -1,6 +1,6 @@
 import { AtButton, AtToast } from 'taro-ui'
 import { useState } from 'react'
-import { Input, View } from '@tarojs/components'
+import { Input, Textarea, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import 'taro-ui/dist/style/components/button.scss'
 import 'taro-ui/dist/style/components/loading.scss'
@@ -58,17 +58,18 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
       {/* <View className={styles.messageInputContainer}>
         
       </View> */}
-      <Input
+      <Textarea
         className={styles.messageInput}
         placeholderClass={styles.messageInputPlaceholder}
         name=''
-        type='text'
         placeholder='请输入消息'
         value={msg}
         onInput={handleInputChange}
         onConfirm={handleSend}
+        maxlength={3000}
+        showConfirmBar={false}
       >
-      </Input>
+      </Textarea>
       <AtButton className={styles.messageSendButton} type='primary' onClick={handleSend}>发送</AtButton>
     </View>
   )

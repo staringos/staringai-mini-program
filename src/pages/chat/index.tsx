@@ -1,5 +1,5 @@
 import { Component, PropsWithChildren } from 'react'
-import { View, Text } from '@tarojs/components'
+import { View, Text, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro';
 
 import "taro-ui/dist/style/components/input.scss";
@@ -11,24 +11,57 @@ import MessageInput from '../../components/MessageInput';
 
 interface IState {
   conversationId: string | undefined,
-  isShare: boolean | undefined
+  isShare: boolean | undefined,
+  scrollTop: number
 }
+
+// export function getWindowHeight(showTabBar = true) {
+//   const info = Taro.getSystemInfoSync()
+//   const { windowHeight, statusBarHeight, titleBarHeight } = info
+//   const tabBarHeight = showTabBar ? TAB_BAR_HEIGHT : 0
+
+//   if (process.env.TARO_ENV === 'rn') {
+//     return windowHeight - statusBarHeight - NAVIGATOR_HEIGHT - tabBarHeight
+//   }
+
+//   if (process.env.TARO_ENV === 'h5') {
+//     return `${windowHeight - tabBarHeight}px`
+//   }
+
+//   if (process.env.TARO_ENV === 'alipay') {
+//     // NOTE 支付宝比较迷，windowHeight 似乎是去掉了 tabBar 高度，但无 tab 页跟 tab 页返回高度是一样的
+//     return `${windowHeight - statusBarHeight - titleBarHeight + (showTabBar ? 0 : TAB_BAR_HEIGHT)}px`
+//   }
+
+//   return `${windowHeight}px`
+// }
 
 export default class Index extends Component<PropsWithChildren, IState> {
   constructor(props) {
     super(props)
     this.state = {
       conversationId: undefined,
-      isShare: undefined
+      isShare: undefined,
+      scrollTop: 0
     }
   }
   
-  componentDidMount () {
+  componentDidMount = () => {
     const params = Taro.Current.router?.params
 
     this.setState({
       conversationId: params?.id,
       isShare: params?.share as any
+    })
+
+    const info = Taro.getSystemInfoSync()
+
+    Taro.onKeyboardHeightChange(() => {
+      const { windowHeight, statusBarHeight } = info
+      console.log("onKeyboardHeightChange:", windowHeight, statusBarHeight)
+      this.setState({
+        scrollTop: windowHeight //  - (statusBarHeight || 0)
+      })
     })
   }
 
@@ -60,13 +93,17 @@ export default class Index extends Component<PropsWithChildren, IState> {
   }
 
   render () {
-    const { conversationId, isShare } = this.state
+    const { conversationId, isShare, scrollTop } = this.state
+
+    console.log("scrollTop:", scrollTop)
 
     return (
-      <View className='container'>
-        <MessageListView conversationId={conversationId} isShare={!!isShare} />
-        <MessageInput conversationId={conversationId as string} isShare={!!isShare} />
-      </View>
+      <ScrollView className='chatContainer' scrollY scrollTop={scrollTop}>
+        <View className='chatContent'>
+          <MessageListView conversationId={conversationId} isShare={!!isShare} />
+          <MessageInput conversationId={conversationId as string} isShare={!!isShare} />
+        </View>
+      </ScrollView>
     )
   }
 }

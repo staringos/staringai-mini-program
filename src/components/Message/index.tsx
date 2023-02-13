@@ -18,7 +18,7 @@ const Message = ({ message, isShare }: IProps) => {
         {!isShare && (message.from === 'them' ? <Text className={styles.messageNickname}>ChatGPT</Text> : <OpenData className={styles.messageNickname + ' ' + styles.right} type='userNickName' />)}
         <View className={styles.messageContentWrapper}>
           <View className={styles.messageContent}>
-            <Text>{message.content}</Text>
+            <Text selectable={true} userSelect={true}>{message.content}</Text>
           </View>
         </View>
       </View>
