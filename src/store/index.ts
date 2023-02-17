@@ -22,7 +22,7 @@ export default createContainer(() => {
   const [conversationList, setConversationList] = useState<Record<string, IConversation>>((storage as any) || {})
   const [user, setUser] = useState({
     avatar: 'https://mtbird-cdn.staringos.com/0010141761616-1311114-413141-113126-157101512171315151100.jpeg',
-    nickName: 'GeorgeZou'
+    nickName: ''
   })
 
   return {

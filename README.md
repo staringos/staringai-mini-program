@@ -16,3 +16,7 @@ yarn run start
 ### 立即体验
 
 <img src="./images/qrcode.jpg" width="160px" />
+
+### 加入社群
+
+<img src="./images/ew-qrcode.jpg" width="160px" />
