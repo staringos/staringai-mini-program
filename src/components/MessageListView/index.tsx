@@ -1,33 +1,31 @@
 import { ScrollView, View } from "@tarojs/components"
 import Message from "../Message"
 import styles from './style.module.less'
-import Store from '../../store'
-import { useEffect, useRef, useState } from "react"
+import {useStore} from '../../store'
+import { useEffect, useRef } from "react"
+import { IConversation } from "@/types/message"
+import { observer } from "mobx-react-lite"
 
 interface IProps {
   conversationId: string | undefined;
   isShare: boolean;
 }
 
-const MessageListView = ({conversationId, isShare}: IProps) => {
+const MessageListView = observer(({conversationId, isShare}: IProps) => {
   const scrollViewRef = useRef<any>(null)
-  const {state, actions} = Store.useContainer()
-  const [curConv, setCurConv] = useState(state.conversationList[conversationId as string] || {messages: []})
-  const lastMessage = curConv?.messages?.[curConv?.messages?.length - 1]
+  const {conversation, getConversation} = useStore()
+  const curConv = conversation as IConversation
 
   const init = async () => {
     if (!conversationId) return
-    const data = await actions.getConversation(conversationId, isShare)
-    setCurConv(data)
+    await getConversation(conversationId, isShare)
   }
 
   useEffect(() => {
     init()
   }, [conversationId])
 
-  useEffect(() => {
-    setCurConv(state.conversationList[conversationId as string] || {messages: []})
-  }, [state.conversationList])
+  const lastMessage = curConv?.messages?.[curConv?.messages?.length - 1]
 
   return (<ScrollView
     ref={scrollViewRef} 
@@ -42,6 +40,6 @@ const MessageListView = ({conversationId, isShare}: IProps) => {
       })}
     </View>
   </ScrollView>)
-}
+})
 
 export default MessageListView

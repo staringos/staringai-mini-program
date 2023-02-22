@@ -1,18 +1,22 @@
 import { Component, PropsWithChildren } from 'react'
 import './app.less'
-import Store from './store'
+import { StoreProvider, Store } from './store'
+
+const store = new Store();
 
 class App extends Component<PropsWithChildren> {
 
-  componentDidMount () {}
+  componentDidMount () {
+  }
 
-  componentDidShow () {}
+  componentDidShow () {
+  }
 
   componentDidHide () {}
 
   // this.props.children 是将要会渲染的页面
   render () {
-    return <Store.Provider>{this.props.children}</Store.Provider>
+    return <StoreProvider store={store}>{this.props.children}</StoreProvider>
   }
 }
 

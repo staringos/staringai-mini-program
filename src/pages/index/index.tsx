@@ -10,14 +10,6 @@ import TabBar from '../../components/TabBar';
 import HomeSwiper from '../../components/HomeSwiper';
 
 export default class Index extends Component<PropsWithChildren> {
-  componentDidMount () { }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-
   onShareAppMessage = (res) => {
     if (res.from === 'button') {
       // 来自页面内转发按钮

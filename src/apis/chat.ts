@@ -1,16 +1,9 @@
-import Taro from '@tarojs/taro'
-import { IMessage } from "src/types/message";
-
-const baseUrl = 'https://ai.staringos.com/api'
+import { IMessage } from "../types/message";
+import request from '../utils/request';
 
 export const sendMessage = (message: IMessage) => {
-  return Taro.request({
-    url: `${baseUrl}/chat`,
-    dataType: 'json',
-    method: 'GET',
-    data: {
-      ...message,
-      msg: message.content
-    }
+  return request.get(`/chat`, {
+    ...message,
+    msg: message.content
   })
 }

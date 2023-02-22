@@ -1,6 +1,6 @@
 import { AtButton, AtToast } from 'taro-ui'
 import { useState } from 'react'
-import { Input, Textarea, View } from '@tarojs/components'
+import { Textarea, View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import 'taro-ui/dist/style/components/button.scss'
 import 'taro-ui/dist/style/components/loading.scss'
@@ -10,17 +10,19 @@ import 'taro-ui/dist/style/components/form.scss'
 import 'taro-ui/dist/style/components/toast.scss'
 
 import styles from './style.module.less'
-import Store from '../../store'
+import {useStore} from '../../store'
+import { observer } from 'mobx-react-lite'
 
 interface IProps {
   conversationId: string
   isShare: boolean
 }
 
-const MessageInput = ({conversationId, isShare}: IProps) => {
-  const { actions, state } = Store.useContainer()
+const MessageInput = observer(({conversationId, isShare}: IProps) => {
+  const { sendMessage, conversation } = useStore()
   const [msg, setMsg] = useState('')
   const [isOpened, setIsOpened] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleInputChange = (val: any) => {
     setMsg(val.detail.value)
@@ -32,10 +34,15 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
       return
     }
 
-    const conv = state.conversationList[conversationId]
+    const conv = conversation
 
-    actions.sendMessage('me', msg, conversationId, conv?.messages?.[conv?.messages?.length - 1]?.messageId || '')
-    setMsg('')
+    setIsLoading(true)
+    try {
+      await sendMessage('me', msg, conversationId, conv?.messages?.[conv?.messages?.length - 1]?.messageId || '')
+      setMsg('')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleGotoHome = () => {
@@ -55,9 +62,6 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
   return (
     <View className={styles.messageInputWrapper}>
       <AtToast isOpened={isOpened} text='消息不能为空' icon='warning' duration={3000}></AtToast>
-      {/* <View className={styles.messageInputContainer}>
-        
-      </View> */}
       <Textarea
         className={styles.messageInput}
         placeholderClass={styles.messageInputPlaceholder}
@@ -69,11 +73,12 @@ const MessageInput = ({conversationId, isShare}: IProps) => {
         maxlength={3000}
         cursorSpacing={140}
         showConfirmBar={false}
+        disabled={isLoading}
       >
       </Textarea>
-      <AtButton className={styles.messageSendButton} type='primary' onClick={handleSend}>发送</AtButton>
+      <AtButton className={styles.messageSendButton} type='primary' onClick={handleSend} disabled={isLoading}>发送</AtButton>
     </View>
   )
-}
+})
 
 export default MessageInput

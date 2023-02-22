@@ -1,3 +1,5 @@
+import path from 'path'
+
 const config = {
   projectName: 'staringos-chatgpt',
   date: '2023-2-9',
@@ -18,6 +20,7 @@ const config = {
     options: {
     }
   },
+  alias: { '@': path.resolve(__dirname,'..','src') },
   framework: 'react',
   compiler: 'webpack5',
   cache: {

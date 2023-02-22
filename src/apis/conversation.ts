@@ -1,27 +1,19 @@
-import Taro from '@tarojs/taro'
-import { IMessage } from 'src/types/message'
-
-const baseUrl = 'https://ai.staringos.com/api'
-// const baseUrl = 'http://localhost:3000/api'
+import request from '../utils/request'
+import { IMessage } from '../types/message'
 
 export const getConversation = (id: string) => {
-  return Taro.request({
-    url: `${baseUrl}/conversation`,
-    dataType: 'json',
-    method: 'GET',
-    data: {
-      id
-    }
+  return request.get('/conversation', {
+    id
   })
 }
 
-export const syncConversation = (id: string, messages: IMessage[]) => {
-  return Taro.request({
-    url: `${baseUrl}/conversation`,
-    dataType: 'json',
-    method: 'POST',
-    data: {
-      id, messages
-    }
+export const syncConversation = (id: string, messages: IMessage[], userId) => {
+  return request.post('/conversation', {
+    id, messages, userId
   })
+}
+
+// get conversation list
+export const getConversationList = () => {
+  return request.get('/user/conversations')
 }

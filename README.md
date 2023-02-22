@@ -6,6 +6,14 @@
 
 ### 快速开始
 
+1. 复制 `src/config.example.ts`
+
+2. 填充小程序的 appId, 
+```ts
+export const appId = ''
+```
+
+3. 安装依赖并启动
 ```shell
 yarn
 yarn run start

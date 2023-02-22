@@ -1,5 +1,5 @@
 import { Component, PropsWithChildren } from 'react'
-import { View, Text, ScrollView } from '@tarojs/components'
+import { View, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro';
 
 import "taro-ui/dist/style/components/input.scss";
@@ -58,7 +58,6 @@ export default class Index extends Component<PropsWithChildren, IState> {
 
     Taro.onKeyboardHeightChange(() => {
       const { windowHeight, statusBarHeight } = info
-      console.log("onKeyboardHeightChange:", windowHeight, statusBarHeight)
       this.setState({
         scrollTop: windowHeight //  - (statusBarHeight || 0)
       })
@@ -94,8 +93,6 @@ export default class Index extends Component<PropsWithChildren, IState> {
 
   render () {
     const { conversationId, isShare, scrollTop } = this.state
-
-    console.log("scrollTop:", scrollTop)
 
     return (
       <ScrollView className='chatContainer' scrollY scrollTop={scrollTop}>

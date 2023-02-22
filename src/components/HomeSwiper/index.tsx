@@ -2,10 +2,11 @@ import Taro from '@tarojs/taro'
 // 引入 Swiper, SwiperItem 组件
 import { Image, Swiper, SwiperItem, View } from '@tarojs/components'
 import styles from './style.module.less'
-import store from '../../store'
+import {useStore} from '../../store'
+import { observer } from 'mobx-react-lite'
 
-const HomeSwiper = () => {
-  const { actions } = store.useContainer()
+const HomeSwiper = observer(() => {
+  const { newConversation } = useStore()
 
   const handleClick = (id: string | undefined) => {
     Taro.navigateTo({
@@ -14,19 +15,20 @@ const HomeSwiper = () => {
   }
 
   const handleNewChat = async () => {
-    const id = await actions.newConversation()
+    const id = await newConversation()
     handleClick(id)
   }
 
   return (
     <Swiper
-      className='test-h'
+      className={styles.swiper}
       indicatorColor='#999'
       indicatorActiveColor='#333'
       vertical
       circular
       indicatorDots
-      autoplay>
+      autoplay
+      >
       <SwiperItem>
         <View className={styles.banner} onClick={handleNewChat}>
           <Image className={styles.bannerImage} src='https://mtbird-cdn.staringos.com/product/images/banner2.png' />
@@ -34,6 +36,6 @@ const HomeSwiper = () => {
       </SwiperItem>
     </Swiper>
   )
-}
+})
 
 export default HomeSwiper

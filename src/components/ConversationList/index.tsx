@@ -1,7 +1,8 @@
-import {View} from '@tarojs/components'
+import {ScrollView, View} from '@tarojs/components'
 import {AtList, AtListItem, AtButton} from 'taro-ui'
-import Taro from '@tarojs/taro'
+import Taro, { useDidShow } from '@tarojs/taro'
 import values from 'lodash/values'
+import { observer } from 'mobx-react-lite'
 
 import 'taro-ui/dist/style/components/list.scss'
 import 'taro-ui/dist/style/components/icon.scss'
@@ -9,19 +10,19 @@ import 'taro-ui/dist/style/components/button.scss'
 import 'taro-ui/dist/style/components/loading.scss'
 
 import styles from './style.module.less'
-import Store from '../../store'
-import { useEffect, useState } from 'react'
-import { IConversation } from 'src/types/message'
+import {useStore} from '../../store'
+import { IConversation } from '../../types/message'
 
-const ConversationList = () => {
-  const { state, actions } = Store.useContainer()
-  const [convList, setConvList] = useState<IConversation[]>([])
+const ConversationList = observer(() => {
+  const { conversationList, getConversationList, newConversation } = useStore()
 
-  const init = () => {
-    setConvList(state.conversationList as any)
+  const init = async () => {
+    await getConversationList()
   }
 
-  useEffect(() => init(), [state.conversationList])
+  useDidShow(() => {
+    init()
+  }, [])
 
   const handleClick = (id: string | undefined) => {
     Taro.navigateTo({
@@ -30,22 +31,22 @@ const ConversationList = () => {
   }
 
   const handleNewClick = async () => {
-    const id = await actions.newConversation()
+    const id = await newConversation()
     handleClick(id)
   }
 
-  // console.log("state.conversationList:", state.conversationList, values(state.conversationList))
-
   return (
-    <View>
+    <View className={styles.conversationListWrapper}>
       <AtButton className={styles.mainButton} onClick={handleNewClick} type='primary'>与 ChatGPT 立即开聊</AtButton>
-      <AtList>
-        {values(convList).map(cur => {
-          return <AtListItem title={cur.messages[0]?.content} onClick={() => handleClick(cur.id)} key={cur.id} />
-        })}
-      </AtList>
+      <ScrollView className={styles.scrollView} scrollY>
+        <AtList>
+          {values(conversationList).map((cur: IConversation) => {
+            return <AtListItem title={cur.messages[0]?.content} onClick={() => handleClick(cur.id)} key={cur.id} />
+          })}
+        </AtList>
+      </ScrollView>
     </View>
   )
-}
+})
 
 export default ConversationList
