@@ -28,10 +28,10 @@ const HomeSwiper = observer(() => {
       circular
       indicatorDots
       autoplay
-      >
+    >
       <SwiperItem>
         <View className={styles.banner} onClick={handleNewChat}>
-          <Image className={styles.bannerImage} src='https://mtbird-cdn.staringos.com/product/images/banner2.png' />
+          <Image className={styles.bannerImage} src='https://mtbird-cdn.staringos.com/product/images/banner3.png' />
         </View>
       </SwiperItem>
     </Swiper>

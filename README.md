@@ -23,7 +23,7 @@ yarn run start
 
 ### 立即体验
 
-<img src="./images/qrcode.jpg" width="160px" />
+<img src="./images/qrcode_new.jpg" width="160px" />
 
 ### 加入社群
 
