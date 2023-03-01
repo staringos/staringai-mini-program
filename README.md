@@ -25,6 +25,6 @@ yarn run start
 
 <img src="./images/qrcode_new.jpg" width="160px" />
 
-### 加入社群
+### 加入社群 / 需求定制
 
 <img src="./images/ew-qrcode.jpg" width="160px" />
