@@ -1,0 +1,18 @@
+{
+  "extEnable": true,
+  "extAppid": "wxc898274cce90a6de",
+  "directCommit": false,
+  "ext": {
+    "mtbirdAppId": "949f7483-f6f7-4ad6-8418-5e63f2bc71e1",
+    "appId": "wxc898274cce90a6de",
+    "name": "wechat",
+    "attr": {
+      "host": "https://mtbird.staringos.com/api",
+      "pageHost": "https://mtbird.staringos.com",
+      "users": [
+        "user_1",
+        "user_2"
+      ]
+    }
+  }
+}

@@ -40,6 +40,8 @@ const MessageInput = observer(({conversationId, isShare}: IProps) => {
     try {
       await sendMessage('me', msg, conversationId, conv?.messages?.[conv?.messages?.length - 1]?.messageId || '')
       setMsg('')
+    } catch(e) {
+      console.log("[handleSend] e:", e)
     } finally {
       setIsLoading(false)
     }

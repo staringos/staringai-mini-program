@@ -6,33 +6,7 @@ import { sendMessage } from "../apis/chat"
 import { IConversation, IMessage } from "../types/message"
 import { randomNum, weixinLogin } from "../utils"
 import { getConversation, getConversationList, syncConversation } from "../apis/conversation"
-import { mpPluginAppId } from "../utils/config"
 import { IUser } from "../types/auth"
-
-let plugin
-
-if (mpPluginAppId) plugin = Taro.requirePlugin("chatbot");
-
-const nlpTest = (txt) => {
-  if (!mpPluginAppId) return txt
-
-  return new Promise((resolve, reject) => {
-    plugin.api.nlp('sensitive', {q: txt, mode: 'cnn'}).then(res => {
-      if (!res) return reject()
-      const other = res.result.find(cur => cur[0] === 'other')
-
-      if (other[1] >= 0.8) {
-        resolve(txt)
-      } else {
-        Taro.showToast({
-          title: '不要发敏感词～',
-          icon: 'error',
-        })
-        reject()
-      }
-    })
-  })
-}
 
 class Store {
   constructor() {
@@ -41,18 +15,11 @@ class Store {
 
   conversationList: Record<string, IConversation> = {}
   conversation: IConversation | null = null
-  chatBotPlugin: any = plugin
   user: IUser | null = null
 
   login = async () => {
     const { data } = await weixinLogin() as any
     const {user, token} = data.data
-    plugin.init({
-      appid: mpPluginAppId, // 小程序示例账户，仅供学习和参考
-      openid: user.openId, // 用户的openid，非必填，建议传递该参数
-      success: () => {}, // 非必填
-      fail: () => {}, // 非必填
-    });
   
     Taro.setStorageSync(STORAGE_ACCESS_TOKEN, token)
     this.user = user
@@ -60,10 +27,9 @@ class Store {
   }
 
   getConversationList = async () => {
+    Taro.showLoading({ title: "加载中..."})
     // check login
     if (!this.user) await this.login()
-
-    Taro.showLoading({ title: "加载中..."})
     const {data} = await getConversationList()
     this.conversationList = data.data
     Taro.hideLoading()
@@ -72,12 +38,12 @@ class Store {
 
   getConversation = async (id: string, isShare: boolean) => {
     // check login
-    if (!this.user) await this.login()
+    // if (!this.user) await this.login()
 
     Taro.showLoading({ title: "加载中..."})
     const { data } = await getConversation(id)
 
-    if (!isShare && data?.data && data?.data?.id === id) {
+    if (data?.data && data?.data?.id === id) {
       this.conversation = data.data
     }
     Taro.hideLoading()
@@ -85,13 +51,17 @@ class Store {
   }
 
   newConversation = async () => {
-    console.log("newConversation")
-    // check login
-    if (!this.user) await this.login()
+    Taro.showLoading({ title: "加载中..."})
+    try {
+      // check login
+      if (!this.user) await this.login()
 
-    const id = randomNum(10)
-    await syncConversation(id, [], this.user?.id)
-    return id
+      const id = randomNum(10)
+      await syncConversation(id, [], this.user?.id)
+      return id
+    } finally {
+      Taro.hideLoading()
+    }
   }
 
   sendMessage = async (from: 'me' | 'them', content: string, conversationId: string, parentMessageId: string) => {
@@ -103,9 +73,6 @@ class Store {
     try {
       // check login
       if (!this.user) await this.login()
-      
-      // check sensitive
-      await nlpTest(content)
 
       // create message
       const msg = {
@@ -126,6 +93,15 @@ class Store {
 
       // send message
       const res = (await sendMessage(msg)).data as any  
+
+      if (res.code === 40012) {
+        Taro.showToast({
+          title: '不要发敏感词～',
+          icon: 'error',
+        })
+        curConv.messages.pop()
+        return
+      }
     
       // create robot respose message
       const msgThem = {
@@ -140,8 +116,6 @@ class Store {
   
       // push 回复
       curConv.messages.push(msgThem)
-    } catch(e) {
-
     } finally {
       Taro.hideLoading()
     }
