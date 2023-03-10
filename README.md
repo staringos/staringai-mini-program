@@ -4,6 +4,10 @@
 
 ![聊天](./images/3.png)
 
+### 立即体验
+
+<img src="./images/qrcode_new.jpg" width="160px" />
+
 ## 无需代码，五分钟上线 ChatGPT小程序
 
 在[星搭低代码平台](https://staringos.com)的加持下，无需代码和小程序后台操作，也无需微信认证300元，五分钟即可上线一套ChatGPT小程序。
@@ -68,10 +72,6 @@ yarn run start
 ```
 
 打开微信开发者工具，引入
-
-### 立即体验
-
-<img src="./images/qrcode_new.jpg" width="160px" />
 
 ### 加入社群 / 需求定制
 
