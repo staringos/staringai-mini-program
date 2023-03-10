@@ -58,9 +58,9 @@
 
 ## 本地运行
 
-1. 复制 `src/config.example.ts`
+1. 将 `src/config.example.ts` 重命名为 `src/config.ts`
 
-2. 填充小程序的 appId, 
+2. 填充小程序的 `appId`
 ```ts
 export const appId = ''
 ```
