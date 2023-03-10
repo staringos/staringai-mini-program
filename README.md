@@ -1,10 +1,10 @@
 # 星搭小星 - ChatGPT 聊天小程序
 
-对接 ChatGPT 的 OpenAI 接口，已更新最新的 gpt-3.5-turbo-0301，在国内实现与 ChatGPT 实时聊天，包含会话界面和聊天界面，一键分享聊天记录到微信聊天和朋友圈
+对接 `ChatGPT` 的 `OpenAI` 接口，已更新最新的 `gpt-3.5-turbo-0301`，在国内实现与 `ChatGPT` 实时聊天，包含会话界面和聊天界面，一键分享聊天记录到微信聊天和朋友圈. 通过`星搭AI`代理，无需翻墙访问，也无需注册 `OpenAI` 账号.
 
 ![聊天](./images/3.png)
 
-### 立即体验
+## 立即体验
 
 <img src="./images/qrcode_new.jpg" width="160px" />
 
