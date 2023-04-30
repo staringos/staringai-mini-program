@@ -6,9 +6,13 @@
 
 ## 立即体验
 
-<img src="./images/qrcode_new.jpg" width="160px" />
+因为众所周知的原因，我们的体验小程序被封了，大家可以扫描二维码使用我们的 Web 版本体验：
 
-## 无需代码，五分钟上线 ChatGPT小程序
+<img src="https://mtbird-cdn.staringos.com/product/images/staringai-qrcode.png" width="160px" />
+
+或者在PC端访问：[staringai](https://staringai.com/)
+
+## 无需代码，五分钟上线 ChatGPT 小程序 / H5
 
 在[星搭低代码平台](https://staringos.com)的加持下，无需代码和小程序后台操作，也无需微信认证300元，无需翻墙访问，也无需注册 `OpenAI` 账号，五分钟即可上线一套ChatGPT小程序。
 
